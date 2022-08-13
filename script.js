@@ -34,14 +34,15 @@ const gameBoard = (() => {
 const gameController = (() => {
     const player1 = Player("X");
     const player2 = Player("O");
+    let round = 1;
 
     const playRound = (index) => {
+        round++;
         gameBoard.setField(index, getCurrentPlayerSign());
     }
 
     const getCurrentPlayerSign = () => {
-        //TODO Add logic to swap current player
-        return player1.getSign();
+        return round %2 === 1 ? player1.getSign() : player2.getSign();
     }
 
     return {playRound}
