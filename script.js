@@ -1,3 +1,5 @@
+"use strict";
+
 const Player = (sign) =>{
     this.sign = sign;
 
@@ -14,7 +16,6 @@ const gameBoard = (() => {
 
     const setField = (index, sign) => {
         board[index] = sign;
-        console.log(board[index])
     };
 
     const getField = (index) => {
@@ -27,15 +28,20 @@ const gameBoard = (() => {
         }
     };
 
-    return {getField,setField,clear, board}
+    return {setField, getField, clear};
 })();// it has brackets at the end making it an IIFE (Immediately Invoked Function Expression).
 
 const gameController = (() => {
     const player1 = Player("X");
-    // const player2 = Player("O");
+    const player2 = Player("O");
 
-    const playRound = (elementIndex) = () => {
-        gameBoard.setField(elementIndex, player1.getSign());
+    const playRound = (index) => {
+        gameBoard.setField(index, getCurrentPlayerSign());
+    }
+
+    const getCurrentPlayerSign = () => {
+        //TODO Add logic to swap current player
+        return player1.getSign();
     }
 
     return {playRound}
@@ -47,6 +53,7 @@ const displayController = (() =>{
 
     boardElements.forEach(section => {
         section.addEventListener('click', () => {
+            //TODO add logic to check if there is text already
             gameController.playRound(parseInt(section.dataset.index));
             updateBoard();
         });
@@ -58,8 +65,11 @@ const displayController = (() =>{
         }
     };
 
-    clearBtn.addEventListener('click', gameBoard.clear);
+    clearBtn.addEventListener('click', () => {
+        gameBoard.clear();
+        updateBoard();
+    });
 
-
+    return {};
 })();
 
