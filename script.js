@@ -37,24 +37,31 @@ const gameController = (() => {
     let round = 1;
 
     const playRound = (index) => {
-        round++;
         gameBoard.setField(index, getCurrentPlayerSign());
+        round++;
+        //msg has to be AFTER round increment to get next player
+        displayController.setMessage(`Player ${getCurrentPlayerSign()}'s Turn`);
+        console.log(round);
     }
 
     const getCurrentPlayerSign = () => {
-        return round %2 === 1 ? player1.getSign() : player2.getSign();
+        return round % 2 === 1 ? player1.getSign() : player2.getSign();
     }
 
-    return {playRound}
+    const reset = () =>{
+        round = 1;
+    }
+    return {playRound, reset}
 })();
 
 const displayController = (() =>{
     const boardElements = document.querySelectorAll('.board-section');
     const clearBtn = document.querySelector('.clear-btn');
+    const gameMsg = document.querySelector('.game-message');
 
     boardElements.forEach(section => {
         section.addEventListener('click', () => {
-            //TODO add logic to check if there is text already
+            if(section.textContent != '') return;
             gameController.playRound(parseInt(section.dataset.index));
             updateBoard();
         });
@@ -66,11 +73,17 @@ const displayController = (() =>{
         }
     };
 
+    const setMessage = (message) => {
+        gameMsg.textContent = message;
+    };
+
     clearBtn.addEventListener('click', () => {
         gameBoard.clear();
+        gameController.reset();
         updateBoard();
+        setMessage("Player X's turn");
     });
 
-    return {};
+    return {setMessage};
 })();
 
