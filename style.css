@@ -1,11 +1,11 @@
-body{
+body {
     margin: 0;
     padding: 0;
     background-color: #d3d3d344;
     height: 100vh;
 }
 
-main{
+main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@ main{
     margin: auto;
 }
 
-.board-wrapper{
+.board-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: repeat(3, 80px);
@@ -24,7 +24,7 @@ main{
     border-radius: 10px;
 }
 
-.board-section{
+.board-section {
     cursor: pointer;
     display: flex;
     border: 1px solid black;
