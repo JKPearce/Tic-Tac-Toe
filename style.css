@@ -25,6 +25,7 @@ main{
 }
 
 .board-section{
+    cursor: pointer;
     display: flex;
     border: 1px solid black;
     align-items: center;
