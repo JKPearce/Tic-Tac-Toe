@@ -10,8 +10,8 @@ The goal of this project is to understand using closures, object
 HTML, CSS, JavaScript
 
 #### Future improvements
--Add an AI
--Add multiple levels of AI
--Add online multiplayer
--Allow users to create accounts
--Best players scoreboard
+- Add an AI
+- Add multiple levels of AI
+- Add online multiplayer
+- Allow users to create accounts
+- Best players scoreboard
