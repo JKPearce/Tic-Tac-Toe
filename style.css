@@ -10,14 +10,17 @@
     --sign-size: calc(var(--section-size) * .9);
     /*sets the text to 90% of section size */
     font-family: 'DynaPuff', cursive, 'Roboto', sans-serif;
+}
 
+button {
+    font-family: inherit;
 }
 
 body {
     margin: 0;
     padding: 0;
+    line-height: 1.6;
     background-color: #d3d3d344;
-
 }
 
 main {
@@ -29,8 +32,13 @@ main {
     width: 100vw;
 }
 
+.game-message {
+    font-size: 2rem;
+}
+
 .board-wrapper {
     display: grid;
+    margin: 5rem;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
     justify-items: center;
@@ -89,6 +97,7 @@ main {
     border: 1px solid black;
     padding: 0.25em .5em;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .winning-message button:hover {
@@ -99,4 +108,85 @@ main {
 
 .winning-message.show {
     display: flex;
+}
+
+.game-options{
+    display: flex;
+    gap: 5px;
+}
+
+.game-options button{
+    font-size: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.25em .5em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.game-options button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal.active{
+    transform: translate(-50%,-50%) scale(1);
+}
+
+.modal-header{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.modal-header .title{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-header .close-button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-body{
+    padding: 10px 15px;
+}
+
+#overlay{
+    position: fixed;
+    transition: 200ms ease-in-out;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active{
+    opacity: 1;
+    pointer-events: all;
 }
