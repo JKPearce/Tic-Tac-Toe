@@ -40,7 +40,7 @@ const gameController = (() => {
     const playRound = (index) => {
         gameBoard.setField(index, getCurrentPlayerSign());
 
-        if (checkWinner(index)) {
+        if (checkWinner()) {
             displayController.displayWinner(`${getCurrentPlayerSign()} WINS!`);
             gameOver = true;
             return;
@@ -57,7 +57,7 @@ const gameController = (() => {
         console.log(round);
     }
 
-    const checkWinner = (i) => {
+    const checkWinner = () => {
         //TODO Add logic to check if there is a winner
         const winningLines = [
             [0, 1, 2],
@@ -70,7 +70,11 @@ const gameController = (() => {
             [2, 4, 6],
         ];
 
-        return winningLines.filter((combination) => combination.includes(i)).some((possibleCombination) => possibleCombination.every((index) => gameBoard.getField(index) === getCurrentPlayerSign()));
+        return winningLines.some(combination => {
+            return combination.every(index => {
+                return gameBoard.getField(index) === getCurrentPlayerSign();
+            });
+        });
     };
 
     const getGameOverStatus = () => {

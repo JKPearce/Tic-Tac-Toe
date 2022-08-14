@@ -1,20 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff&family=Roboto&display=swap');
 
-*::after, *::before{
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --section-size: 100px;
-    --sign-size: calc(var(--section-size) * .9); /*sets the text to 90% of section size */
-    font-family: 'DynaPuff', cursive,'Roboto', sans-serif;
-    
+    --sign-size: calc(var(--section-size) * .9);
+    /*sets the text to 90% of section size */
+    font-family: 'DynaPuff', cursive, 'Roboto', sans-serif;
+
 }
+
 body {
     margin: 0;
     padding: 0;
     background-color: #d3d3d344;
-    
+
 }
 
 main {
@@ -47,25 +50,25 @@ main {
 
 .board-section:first-child,
 .board-section:nth-child(2),
-.board-section:nth-child(3){
+.board-section:nth-child(3) {
     border-top: none;
 }
 
-.board-section:nth-child(3n +1){
+.board-section:nth-child(3n +1) {
     border-left: none;
 }
 
-.board-section:nth-child(3n + 3){
+.board-section:nth-child(3n + 3) {
     border-right: none;
 }
 
 .board-section:last-child,
 .board-section:nth-child(8),
-.board-section:nth-child(7){
+.board-section:nth-child(7) {
     border-bottom: none;
 }
 
-.winning-message{
+.winning-message {
     display: none;
     position: fixed;
     top: 0;
@@ -80,7 +83,7 @@ main {
     flex-direction: column;
 }
 
-.winning-message button{
+.winning-message button {
     font-size: 3rem;
     background-color: white;
     border: 1px solid black;
@@ -88,12 +91,12 @@ main {
     cursor: pointer;
 }
 
-.winning-message button:hover{
+.winning-message button:hover {
     background-color: black;
     color: white;
     border-color: white;
 }
 
-.winning-message.show{
+.winning-message.show {
     display: flex;
 }
