@@ -4,7 +4,7 @@ Tic tac toe aka noughts and crosses
 Live Demo: [Here](https://jkpearce.github.io/Tic-Tac-Toe/)
 
 ## Goals
-The goal of this project is to understand using closures, object
+The goal of this project was to help understand Factory Functions and the Module Pattern (Closures)
 
 ### Tech used 
 HTML, CSS, JavaScript
