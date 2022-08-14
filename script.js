@@ -1,13 +1,22 @@
 "use strict";
 
-const Player = (sign) => {
+const Player = (sign, name) => {
     this.sign = sign;
+    this.name = name;
 
     const getSign = () => {
         return sign;
     };
 
-    return { getSign }
+    const setName = (playerName) => {
+        name = playerName;
+    }
+
+    const getPlayerName = () => {
+        return name;
+    }
+
+    return { getSign, getPlayerName, setName }
 };
 
 //create gameBoard MODULE
@@ -32,16 +41,19 @@ const gameBoard = (() => {
 })();
 
 const gameController = (() => {
-    const player1 = Player("X");
-    const player2 = Player("O");
+    const setNameForm = document.getElementById('setPlayerNames');
+    const player1 = Player("X", "Player 1");
+    const player2 = Player("O", "Player 2");
     let round = 1;
     let gameOver = false;
 
     const playRound = (index) => {
-        gameBoard.setField(index, getCurrentPlayerSign());
+        gameBoard.setField(index, getCurrentPlayer().getSign());
+
+        console.log(getCurrentPlayer().getSign());
 
         if (checkWinner()) {
-            displayController.displayWinner(`${getCurrentPlayerSign()} WINS!`);
+            displayController.displayWinner(`${getCurrentPlayer().getPlayerName()} WINS!`);
             gameOver = true;
             return;
         }
@@ -50,11 +62,9 @@ const gameController = (() => {
             gameOver = true;
             return;
         }
-
         round++;
         //msg has to be AFTER round increment to get next player
-        displayController.setMessage(`Player ${getCurrentPlayerSign()}'s Turn`);
-        console.log(round);
+        displayController.setMessage(`Player ${getCurrentPlayer().getPlayerName()} Turn`);
     }
 
     const checkWinner = () => {
@@ -72,7 +82,7 @@ const gameController = (() => {
 
         return winningLines.some(combination => {
             return combination.every(index => {
-                return gameBoard.getField(index) === getCurrentPlayerSign();
+                return gameBoard.getField(index) === getCurrentPlayer().getSign();
             });
         });
     };
@@ -81,16 +91,27 @@ const gameController = (() => {
         return gameOver;
     };
 
-    const getCurrentPlayerSign = () => {
-        return round % 2 === 1 ? player1.getSign() : player2.getSign();
-    };
+    setNameForm.addEventListener('submit', event =>{
+        event.preventDefault();
+        player1.setName(document.getElementById('player1Name').value);
+        player2.setName(document.getElementById('player2Name').value);
+        const modals = document.querySelectorAll('.modal.active');
+        modals.forEach(modal => {
+            displayController.closeModal(modal);
+        })
+    });
+    
+
+    const getCurrentPlayer = () => {
+        return round % 2 === 1 ? player1 : player2;
+    }
 
     const reset = () => {
         round = 1;
         gameOver = false;
     };
 
-    return { playRound, getGameOverStatus, reset }
+    return { playRound, getGameOverStatus, reset}
 })();
 
 const displayController = (() => {
@@ -101,7 +122,6 @@ const displayController = (() => {
     const restartBtn = document.getElementById('restartButton');
     const openModalButtons = document.querySelectorAll('[data-modal-target]');
     const closeModalButtons = document.querySelectorAll('[data-close-button]');
-    const setNameForm = document.getElementById('setNames');
     const overlay = document.getElementById('overlay');
 
     boardElements.forEach(section => {
@@ -174,6 +194,6 @@ const displayController = (() => {
         overlay.classList.remove('active');
     }
 
-    return { setMessage, displayWinner };
+    return { setMessage, displayWinner, closeModal};
 })();
 
