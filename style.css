@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff&family=Roboto&display=swap');
+
+*::after, *::before{
+    box-sizing: border-box;
+}
+
+:root{
+    --section-size: 100px;
+    --sign-size: calc(var(--section-size) * .9); /*sets the text to 90% of section size */
+    font-family: 'DynaPuff', cursive,'Roboto', sans-serif;
+    
+}
 body {
     margin: 0;
     padding: 0;
     background-color: #d3d3d344;
-    height: 100vh;
+    
 }
 
 main {
@@ -10,18 +22,16 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 60%;
-    margin: auto;
+    height: 100vh;
+    width: 100vw;
 }
 
 .board-wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(3, 80px);
+    grid-template-columns: repeat(3, auto);
     justify-content: center;
-    width: 100%;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
+    justify-items: center;
+    align-items: center;
 }
 
 .board-section {
@@ -30,5 +40,60 @@ main {
     border: 1px solid black;
     align-items: center;
     justify-content: center;
-    font-size: 54px;
+    font-size: var(--sign-size);
+    width: var(--section-size);
+    height: var(--section-size);
+}
+
+.board-section:first-child,
+.board-section:nth-child(2),
+.board-section:nth-child(3){
+    border-top: none;
+}
+
+.board-section:nth-child(3n +1){
+    border-left: none;
+}
+
+.board-section:nth-child(3n + 3){
+    border-right: none;
+}
+
+.board-section:last-child,
+.board-section:nth-child(8),
+.board-section:nth-child(7){
+    border-bottom: none;
+}
+
+.winning-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message button{
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.25em .5em;
+    cursor: pointer;
+}
+
+.winning-message button:hover{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show{
+    display: flex;
 }

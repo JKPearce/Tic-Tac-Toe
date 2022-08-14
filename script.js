@@ -41,12 +41,12 @@ const gameController = (() => {
         gameBoard.setField(index, getCurrentPlayerSign());
 
         if (checkWinner(index)) {
-            displayController.setMessage(`${getCurrentPlayerSign()} WINS!`);
+            displayController.displayWinner(`${getCurrentPlayerSign()} WINS!`);
             gameOver = true;
             return;
         }
         if (round === 9) {
-            displayController.setMessage("DRAW!");
+            displayController.displayWinner("DRAW!");
             gameOver = true;
             return;
         }
@@ -93,6 +93,7 @@ const displayController = (() => {
     const boardElements = document.querySelectorAll('.board-section');
     const clearBtn = document.querySelector('.clear-btn');
     const gameMsg = document.querySelector('.game-message');
+    const winningMsgOverlay = document.getElementById('winnerOverlay');
 
     boardElements.forEach(section => {
         section.addEventListener('click', () => {
@@ -112,6 +113,11 @@ const displayController = (() => {
         gameMsg.textContent = message;
     };
 
+    const displayWinner = (winner) => {
+        winningMsgOverlay.classList.add('show');
+        winningMsgOverlay.firstChild.textContent = winner;
+    }
+
     clearBtn.addEventListener('click', () => {
         gameBoard.clear();
         gameController.reset();
@@ -119,6 +125,6 @@ const displayController = (() => {
         setMessage("Player X's turn");
     });
 
-    return { setMessage };
+    return { setMessage, displayWinner };
 })();
 
