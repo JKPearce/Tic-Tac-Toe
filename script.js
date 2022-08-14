@@ -98,6 +98,7 @@ const displayController = (() => {
     const clearBtn = document.querySelector('.clear-btn');
     const gameMsg = document.querySelector('.game-message');
     const winningMsgOverlay = document.getElementById('winnerOverlay');
+    const restartBtn = document.getElementById('restartButton');
 
     boardElements.forEach(section => {
         section.addEventListener('click', () => {
@@ -128,6 +129,13 @@ const displayController = (() => {
         updateBoard();
         setMessage("Player X's turn");
     });
+
+    restartBtn.addEventListener('click', () => {
+        gameController.reset();
+        gameBoard.clear();
+        updateBoard();
+        winningMsgOverlay.classList.remove('show');
+    })
 
     return { setMessage, displayWinner };
 })();
